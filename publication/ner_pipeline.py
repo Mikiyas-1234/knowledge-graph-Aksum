@@ -330,7 +330,7 @@ def extract_relations(
 # 6. Co-mention (candidate) extraction
 # ---------------------------------------------------------------------------
 
-def extract_comenentions(
+def extract_comentions(
     sentence: str,
     entity_ids: list[str],
     source_id: str,
@@ -425,7 +425,7 @@ def process_file(
                 sentence, entity_ids, source_id, page_ref, edge_counter
             )
         )
-        extract_comenentions(sentence, entity_ids, source_id, page_ref, co_counts)
+        extract_comentions(sentence, entity_ids, source_id, page_ref, co_counts)
 
     return asserted, new_nodes
 
