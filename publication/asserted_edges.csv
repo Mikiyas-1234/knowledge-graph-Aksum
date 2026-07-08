@@ -1,0 +1,36 @@
+edge_id,source_node_id,target_node_id,relation_type,relation_label,evidence_type,source,page_ref,extraction_method,notes
+ae_001,place_aksum,place_tigray,P89_falls_within,falls within,asserted,phillipson_2011,p.30,hand_curated,Aksum city is situated in the Tigray highlands
+ae_002,place_adulis,place_eritrea,P89_falls_within,falls within,asserted,phillipson_2011,p.32,hand_curated,Adulis port is located in the territory that is now Eritrea
+ae_003,place_beta_giyorgis,place_aksum,P89_falls_within,falls within,asserted,sernicola_2019,p.3,hand_curated,Beta Giyorgis hill lies on the western edge of the ancient Aksum settlement
+ae_004,place_gobedra,place_aksum,P89_falls_within,falls within,asserted,phillipson_2011,p.33,hand_curated,Gobedra rockshelter is located in the Aksum area
+ae_005,arch_dungur_palace,place_dungur,P53_has_former_or_current_location,located at,asserted,phillipson_1997,p.47,hand_curated,Dungur palace complex is located at the Dungur locality west of Aksum
+ae_006,arch_mausoleum,place_stele_park,P53_has_former_or_current_location,located at,asserted,phillipson_1997,p.57,hand_curated,The Mausoleum (Tomb of Brick Arches) lies beneath the Northern Stelae Field
+ae_007,arch_church_maryam,place_aksum,P53_has_former_or_current_location,located at,asserted,phillipson_2011,p.38,hand_curated,The Church of St. Mary of Zion stands within the Aksum town complex
+ae_008,arch_tomb_kaleb,place_aksum,P53_has_former_or_current_location,located at,asserted,phillipson_2011,p.38,hand_curated,Tomb of Kaleb and Gebre Meskel is north of the Aksum town centre
+ae_009,arch_beta_giyorgis_terrace,place_beta_giyorgis,P53_has_former_or_current_location,located at,asserted,sernicola_2019,p.4,hand_curated,The terrace complex is the defining feature of the Beta Giyorgis hill site
+ae_010,arch_platform_ona_nagast,place_ona_nagast,P53_has_former_or_current_location,located at,asserted,sernicola_2019,p.5,hand_curated,Monumental platform structure is the principal feature at Ona Nagast
+ae_011,object_stele_1,place_stele_park,P53_has_former_or_current_location,found at,asserted,phillipson_1997,p.55,hand_curated,Great Stele lies fallen in the Northern Stelae Field
+ae_012,object_stele_2,place_stele_park,P53_has_former_or_current_location,found at,asserted,phillipson_2011,p.36,hand_curated,Stele 2 originally stood in the Northern Stelae Field before removal to Rome
+ae_013,object_stele_3,place_stele_park,P53_has_former_or_current_location,found at,asserted,phillipson_2011,p.36,hand_curated,Stele 3 remains standing in the Northern Stelae Field
+ae_014,object_ezana_inscription,place_aksum,P53_has_former_or_current_location,found at,asserted,phillipson_2011,p.37,hand_curated,Ezana Inscription located in Aksum; precise find-spot in the town
+ae_015,person_ezana,period_classic_aksumite,P4_has_time-span,reigned during,asserted,phillipson_2011,p.37,hand_curated,Ezana's reign falls within the Classic Aksumite period c. 325–360 CE
+ae_016,person_kaleb,period_classic_aksumite,P4_has_time-span,reigned during,asserted,phillipson_2011,p.38,hand_curated,Kaleb's reign c. 514–540 CE falls within the Classic Aksumite period
+ae_017,person_endubis,period_early_aksumite,P4_has_time-span,reigned during,asserted,phillipson_2011,p.36,hand_curated,Endubis issued coins c. late 3rd century CE placing him in the Early Aksumite period
+ae_018,object_coin_endubis,period_early_aksumite,P4_has_time-span,dated to,asserted,phillipson_2011,p.36,hand_curated,Endubis gold coin dated to the Early Aksumite period on typological grounds
+ae_019,object_coin_ezana,period_classic_aksumite,P4_has_time-span,dated to,asserted,phillipson_2011,p.37,hand_curated,Pre-Christian Ezana coin belongs to the Classic Aksumite period
+ae_020,period_pre_aksumite,period_proto_aksumite,P9i_forms_part_of,precedes,asserted,phillipson_2011,p.31,hand_curated,Pre-Aksumite period ends and Proto-Aksumite begins c. 100 BCE
+ae_021,period_proto_aksumite,period_early_aksumite,P9i_forms_part_of,precedes,asserted,phillipson_2011,p.31,hand_curated,Proto-Aksumite transitions to Early Aksumite c. 100 CE
+ae_022,period_early_aksumite,period_classic_aksumite,P9i_forms_part_of,precedes,asserted,phillipson_2011,p.32,hand_curated,Early Aksumite transitions to Classic Aksumite c. 350 CE
+ae_023,period_classic_aksumite,period_late_aksumite,P9i_forms_part_of,precedes,asserted,phillipson_2011,p.37,hand_curated,Classic Aksumite transitions to Late Aksumite c. 550 CE
+ae_024,place_beta_giyorgis,person_phillipson_d,P14i_performed,excavated by,asserted,phillipson_1997,p.1,hand_curated,Beta Giyorgis excavated as part of the 1993–1997 Phillipson-directed project
+ae_025,place_dungur,person_phillipson_d,P14i_performed,excavated by,asserted,phillipson_1997,p.47,hand_curated,Dungur excavated during the 1993–1997 British Institute in Eastern Africa campaign
+ae_026,object_aksumite_pottery,place_beta_giyorgis,P53_has_former_or_current_location,found at,automated,sernicola_2019,p.11,regex_match,Aksumite fine ware described as recovered from Beta Giyorgis excavation contexts
+ae_027,object_lithics_beta,place_beta_giyorgis,P53_has_former_or_current_location,found at,automated,sernicola_2019,p.6,regex_match,Lithics assemblage described as found at Beta Giyorgis Pre-Aksumite levels
+ae_028,object_iron_slag,place_ona_nagast,P53_has_former_or_current_location,found at,automated,sernicola_2019,p.12,regex_match,Iron slag described as recovered from Ona Nagast activity surfaces
+ae_029,object_glass_beads,place_matara,P53_has_former_or_current_location,found at,automated,phillipson_2011,p.35,regex_match,Glass beads described as found at Matara and Adulis in discussion of trade goods
+ae_030,place_beta_giyorgis,person_sernicola,P14i_performed,excavated by,automated,sernicola_2019,p.1,regex_match,"Sernicola identified as director of Beta Giyorgis excavation in byline; ""excavated by"" pattern matched"
+ae_031,place_ona_nagast,person_sernicola,P14i_performed,excavated by,automated,sernicola_2019,p.5,regex_match,"Ona Nagast identified as excavated by Sernicola team; ""excavated at"" pattern matched"
+ae_032,place_mezber,person_fattovich,P14i_performed,excavated by,automated,phillipson_2011,p.33,regex_match,"Mezber excavations attributed to Fattovich; ""excavated by"" pattern matched"
+ae_033,c14_beta1_oxf,period_proto_aksumite,P4_has_time-span,dated to,automated,phillipson_1997,p.615,regex_match,OxA-7846 calibrated date range 370–70 BCE spans Proto-Aksumite period; dated to pattern matched
+ae_034,c14_dungur_beta,period_classic_aksumite,P4_has_time-span,dated to,automated,phillipson_1997,p.617,regex_match,Beta-95230 calibrated date 530–680 CE overlaps Classic/Late Aksumite; dated to pattern matched
+ae_035,object_bronze_lamp,place_aksum,P53_has_former_or_current_location,found at,automated,phillipson_2011,p.37,regex_match,Bronze lamp described as recovered from urban context at Aksum; found at pattern matched
