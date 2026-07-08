@@ -1,0 +1,131 @@
+id,label,cidoc_class,category,source_document,source_locator,epistemic_provenance,confidence,notes
+place_aksum,Aksum,E53_Place,archaeological_site,S1;S3;S4,S1 p.29-32; S4 TOC,academic_excavation_report,1.0,Merges surface variants 'Aksum'/'aksum'/'Axum' seen across source files into a single resolved place node (fixes the Aksum/Axum entity-resolution failure identified in the prior code audit).
+place_beta_giyorgis,Beta Giyorgis,E53_Place,archaeological_site,S1,S1 p.30,academic_excavation_report,1.0,Hill near Aksum; excavations by Fattovich & Bard revealed a community ancestral to early Aksum.
+place_adulis,Adulis,E53_Place,archaeological_site,S1,S1 p.29-30,academic_excavation_report,1.0,Red Sea port; capital's port city under king Zoscales per the Periplus of the Erythraean Sea.
+place_lalibela,Lalibela,E53_Place,archaeological_site,S1,S1 p.32,academic_excavation_report,1.0,Rock-hewn churches; Zagwe-period; St George church dated 13th century in source figure caption.
+place_seglamen_site_sg1,Seglamen (site SG1),E53_Place,archaeological_site,S3,S3 p.391-392,academic_excavation_report,1.0,"Pre-Aksumite centre ~15km SW of Aksum, ~7ha, intensively investigated since 2010."
+place_amda_tsion_area_of_sg1,Amda Tsion (area of SG1),E53_Place,archaeological_area,S3,S3 p.392,academic_excavation_report,1.0,Settlement area within site SG1 containing the monumental building.
+place_mogareb_area_of_sg1,Mogareb (area of SG1),E53_Place,archaeological_area,S3,S3 p.392-393,academic_excavation_report,1.0,Cemetery area within site SG1.
+place_d_site_kidane_mehret,D site (Kidane Mehret),E53_Place,archaeological_site,S4,S4 TOC Ch.10 p.267,academic_excavation_report,1.0,Excavation area at Aksum; radiocarbon-dated contexts in Appendix VI.
+place_k_site_maleke_aksum,K site (Maleke Aksum),E53_Place,archaeological_site,S4,S4 TOC Ch.11 p.381,academic_excavation_report,1.0,Excavation area at Aksum; radiocarbon-dated contexts in Appendix VI.
+place_tomb_of_the_brick_arches,Tomb of the Brick Arches,E53_Place,funerary_monument,S4,S4 Appendix VI p.503,academic_excavation_report,1.0,
+place_mausoleum,Mausoleum,E53_Place,funerary_monument,S4,S4 Appendix VI p.504,academic_excavation_report,1.0,
+place_gudit_stelae_field,Gudit Stelae Field,E53_Place,funerary_monument,S4,S4 Appendix VI p.504,academic_excavation_report,1.0,
+place_tomb_of_bazen,Tomb of Bazen,E53_Place,funerary_monument,S4,S4 TOC Ch.12 p.425,academic_excavation_report,0.9,Listed in table of contents (Chapter 12); body chapter not yet processed — flagged as low-coverage.
+place_tomb_of_the_false_door,Tomb of the False Door,E53_Place,funerary_monument,S4,S4 TOC Ch.12 p.425,academic_excavation_report,0.9,Listed in TOC only; body chapter not yet processed.
+place_rock_shelter_1_megaru,Rock shelter #1 (Megaru),E53_Place,rock_shelter,S3,S3 p.394,academic_excavation_report,1.0,"Coordinates as given in source: 04°63'6.37"" N, 15°55'09.00"" E; elevation 2018 m asl."
+place_rock_shelter_2_megaru,Rock shelter #2 (Megaru),E53_Place,rock_shelter,S3,S3 p.394,academic_excavation_report,1.0,"Coordinates: 04°63'8.26"" N, 15°54'8.31"" E; elevation 2024 m asl."
+place_rock_shelter_3_megaru,Rock shelter #3 (Megaru),E53_Place,rock_shelter,S3,S3 p.394,academic_excavation_report,1.0,"Coordinates: 04°63'7.87"" N, 15°54'6.20"" E; elevation 2016 m asl."
+place_rock_shelter_4_megaru,Rock shelter #4 (Megaru),E53_Place,rock_shelter,S3,S3 p.394,academic_excavation_report,1.0,"Coordinates: 04°63'8.19"" N, 15°54'5.96"" E; elevation 2011 m asl."
+person_king_ezana,King Ezana,E21_Person,historical_ruler,S1,S1 p.29,academic_excavation_report,1.0,2nd quarter 4th century CE; issued long inscriptions in Greek and Ge'ez; adopted Christianity.
+person_king_kaleb,King Kaleb,E21_Person,historical_ruler,S1,S1 p.29,academic_excavation_report,1.0,2nd quarter 6th century CE; led military intervention in southern Arabia.
+person_king_lalibela_zagwe,King Lalibela (Zagwe),E21_Person,historical_ruler,S1,S1 p.32,academic_excavation_report,1.0,"Zagwe king, traditionally c. AD 1200; rock-hewn church complexes attributed to his reign."
+person_david_w_phillipson,David W. Phillipson,E21_Person,researcher,S1;S4,S1 byline; S4 title page,academic_excavation_report,1.0,
+person_luisa_sernicola,Luisa Sernicola,E21_Person,researcher,S3,S3 p.391,academic_excavation_report,1.0,"Research co-director and field director, 2018-2019 seasons."
+person_andrea_manzo,Andrea Manzo,E21_Person,researcher,S3,S3 p.391,academic_excavation_report,1.0,Co-director of the UNIOR/ISMEO expedition.
+person_rodolfo_fattovich,Rodolfo Fattovich,E21_Person,researcher,S2;S3,S2 p.1; S3 refs,academic_excavation_report,1.0,
+person_kathryn_bard,Kathryn Bard,E21_Person,researcher,S1;S2,S1 p.30; S2 p.1,academic_excavation_report,1.0,"Co-excavator, Beta Giyorgis, with Fattovich."
+period_pre_aksumite,Pre-Aksumite,E4_Period,chronological_period,S3,S3 p.391-393,academic_excavation_report,1.0,
+period_aksumite,Aksumite,E4_Period,chronological_period,S1;S4,S1 p.29-31,academic_excavation_report,1.0,
+period_post_aksumite,Post-Aksumite,E4_Period,chronological_period,S3,S3 p.392,academic_excavation_report,1.0,
+period_zagwe_period,Zagwe period,E4_Period,chronological_period,S1,S1 p.32,academic_excavation_report,1.0,c. 11th-13th century CE per source narrative.
+object_sandstone_stela_tomb_34,"Sandstone stela, Tomb 34",E22_Human-Made_Object,material_culture,S3,S3 p.393,academic_excavation_report,1.0,"H.129cm, W.25cm, Th.10cm; found laying atop the shaft of Tomb 34."
+object_incense_burners_tomb_34_context,"Incense burners, Tomb 34 context",E22_Human-Made_Object,material_culture,S3,S3 p.393,academic_excavation_report,1.0,High quantity collected near the stela base and within the covering stone platform.
+object_cast_brass_disc_stela_apex_fitting,Cast brass disc (stela apex fitting),E22_Human-Made_Object,material_culture,S1,S1 p.30 fig.1,academic_excavation_report,1.0,Formerly attached to the apex of a monolithic stela marking a royal tomb at Aksum; dated 3rd-4th century AD in figure caption.
+object_ezana_s_long_inscriptions,Ezana's long inscriptions,E22_Human-Made_Object,inscription,S1,S1 p.29,academic_excavation_report,1.0,"Greek and Ge'ez, sometimes in parallel texts; record territorial expansion and conversion to Christianity."
+object_aksumite_coinage,Aksumite coinage,E22_Human-Made_Object,material_culture,S1,S1 p.29,academic_excavation_report,1.0,"Issued in gold, silver and copper-alloy bearing royal names; issue discontinued by early 7th century."
+feature_room_2_amda_tsion_building,Room 2 (Amda Tsion building),E25_Man-Made_Feature,architectural_feature,S3,S3 p.392-393,academic_excavation_report,1.0,"Rectangular room, ca. 4.75x4.95m; likely a storeroom."
+feature_room_4_amda_tsion_building,Room 4 (Amda Tsion building),E25_Man-Made_Feature,architectural_feature,S3,S3 p.393,academic_excavation_report,1.0,"Small square room, 1.5x1.5m, stone pavement."
+feature_room_5_amda_tsion_building,Room 5 (Amda Tsion building),E25_Man-Made_Feature,architectural_feature,S3,S3 p.393,academic_excavation_report,1.0,"Small square room, 1.5x1.5m, stone pavement."
+feature_tomb_34_mogareb_trench_segxxv,"Tomb 34 (Mogareb, trench SEGXXV)",E25_Man-Made_Feature,funerary_feature,S3,S3 p.393,academic_excavation_report,1.0,Rough circular shaft tomb.
+feature_tomb_35_mogareb_trench_segxxv,"Tomb 35 (Mogareb, trench SEGXXV)",E25_Man-Made_Feature,funerary_feature,S3,S3 p.393,academic_excavation_report,1.0,Rough circular shaft tomb.
+feature_tomb_36_mogareb_trench_segxxv,"Tomb 36 (Mogareb, trench SEGXXV)",E25_Man-Made_Feature,funerary_feature,S3,S3 p.393,academic_excavation_report,1.0,Rough circular shaft tomb.
+feature_tomb_37_mogareb_trench_segxxv,"Tomb 37 (Mogareb, trench SEGXXV)",E25_Man-Made_Feature,funerary_feature,S3,S3 p.393,academic_excavation_report,0.9,Identified but not yet excavated as of 2019 report — flagged as unexcavated/uncertain contents.
+measurement_radiocarbon_determination_oxa_8340,Radiocarbon determination OxA-8340,E16_Measurement,radiocarbon_date,S4,S4 p.503,academic_excavation_report,1.0,Material: charcoal (Ficus); 1705±45 BP; 68.2% conf.: AD 250-300 / 320-400; 95.4% conf.: AD 230-430.
+measurement_radiocarbon_determination_oxa_8341,Radiocarbon determination OxA-8341,E16_Measurement,radiocarbon_date,S4,S4 p.503,academic_excavation_report,1.0,Material: charcoal (Acokanthera); 1655±40 BP; 68.2% conf.: AD 340-430; 95.4% conf.: AD 250-530.
+measurement_radiocarbon_determination_oxa_8366,Radiocarbon determination OxA-8366,E16_Measurement,radiocarbon_date,S4,S4 p.504,academic_excavation_report,1.0,Material: charcoal (Acacia); 1745±30 BP; 68.2% conf.: AD 240-265 / 280-335; 95.4% conf.: AD 220-390.
+measurement_radiocarbon_determination_oxa_8358,Radiocarbon determination OxA-8358,E16_Measurement,radiocarbon_date,S4,S4 p.504,academic_excavation_report,1.0,Material: charcoal (Rhus); 1825±40 BP; 68.2% conf.: AD 130-230; 95.4% conf.: AD 80-320.
+measurement_radiocarbon_determination_room_2_context_su64,"Radiocarbon determination, Room 2 context SU64",E16_Measurement,radiocarbon_date,S3,S3 p.392,academic_excavation_report,1.0,Charcoal sample from living-surface context immediately above bedrock; cal. 910-808 BC (calibration confidence level not stated in source text).
+measurement_radiocarbon_determination_room_4_lowest_stratum,"Radiocarbon determination, Room 4 lowest stratum",E16_Measurement,radiocarbon_date,S3,S3 p.392,academic_excavation_report,1.0,Charcoal sample; cal. 805-746 BC.
+measurement_radiocarbon_determination_su53,"Radiocarbon determination, SU53",E16_Measurement,radiocarbon_date,S3,S3 p.392 n.5,academic_excavation_report,1.0,Post-Aksumite disturbance date; cal. AD 1033-1190.
+measurement_radiocarbon_determination_su54,"Radiocarbon determination, SU54",E16_Measurement,radiocarbon_date,S3,S3 p.392 n.5,academic_excavation_report,1.0,Post-Aksumite disturbance date; cal. AD 1028-1184.
+measurement_radiocarbon_determination_su65,"Radiocarbon determination, SU65",E16_Measurement,radiocarbon_date,S3,S3 p.392 n.5,academic_excavation_report,1.0,Post-Aksumite disturbance date; cal. AD 1016-1154.
+object_coin,coin,E22_Human-Made_Object,material_culture,S1;S4,S1 line 1,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: coin
+object_inscription,inscription,E22_Human-Made_Object,material_culture,S1;S3;S4,S1 line 1,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Inscription, Inscriptions, inscription, inscriptions"
+object_stelae,stelae,E22_Human-Made_Object,material_culture,S1;S3;S4,S1 line 1,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: STELA, STELAE, Stela, Stelae, stela, stelae"
+object_coins,coins,E22_Human-Made_Object,material_culture,S1;S4,S1 line 1,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Coins, coins"
+object_gold,gold,E22_Human-Made_Object,material_culture,S1;S3;S4,S1 line 1,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Gold, gold"
+object_ivory,ivory,E22_Human-Made_Object,material_culture,S1;S4,S1 line 1,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Ivory, ivory"
+object_silver,silver,E22_Human-Made_Object,material_culture,S1;S3;S4,S1 line 1,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Silver, silver"
+object_pottery,pottery,E22_Human-Made_Object,material_culture,S1;S3;S4,S1 line 1,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: POTTERY, Pottery, pottery"
+person_diego_capra,Diego Capra,E21_Person,person,S3,S3 line 17,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Diego Capra
+person_eleonora_minucci,Eleonora Minucci,E21_Person,person,S3,S3 line 17,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Eleonora Minucci
+person_francesco_michele_rega,Francesco Michele Rega,E21_Person,person,S3,S3 line 17,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Francesco Michele Rega
+person_friat_angesom,Friat Angesom,E21_Person,person,S3,S3 line 36,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Friat Angesom
+place_amda_tsion,Amda Tsion,E53_Place,archaeological_site,S3,S3 line 86,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: AMDA TSION, Amda Tsion"
+place_mogareb,Mogareb,E53_Place,archaeological_site,S3,S3 line 86,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: MOGAREB, Mogareb"
+object_ceramics,ceramics,E22_Human-Made_Object,material_culture,S3;S4,S3 line 109,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: ceramics
+feature_room_1,Room 1,E25_Man-Made_Feature,numbered_feature,S3,S3 line 117,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Room 1
+feature_room_2,Room 2,E25_Man-Made_Feature,numbered_feature,S3,S3 line 135,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Room 2
+feature_room_4,Room 4,E25_Man-Made_Feature,numbered_feature,S3;S4,S3 line 135,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Room 4, room 4"
+feature_room_5,Room 5,E25_Man-Made_Feature,numbered_feature,S3,S3 line 135,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Room 5
+feature_trenches,trenches,E25_Man-Made_Feature,numbered_feature,S3;S4,S3 line 144,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Trenches, trenches"
+feature_trench_and,trench and,E25_Man-Made_Feature,numbered_feature,S3;S4,S3 line 174,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench and
+feature_trench_exposed,trench exposed,E25_Man-Made_Feature,numbered_feature,S3,S3 line 181,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench exposed
+feature_tomb_34,Tomb 34,E25_Man-Made_Feature,numbered_feature,S3;S4,S3 line 181,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Tomb 3, Tomb 34, tomb 4"
+feature_tomb_37,Tomb 37,E25_Man-Made_Feature,numbered_feature,S3;S4,S3 line 187,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Tomb 37, Tomb 7"
+feature_trench_segxxv,trench SEGXXV,E25_Man-Made_Feature,numbered_feature,S3,S3 line 215,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: trench SEGXXV, trench SSEGXXV"
+feature_tomb_31,Tomb 31,E25_Man-Made_Feature,numbered_feature,S3,S3 line 262,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Tomb 31
+place_rock_shelter_1985,rock shelter 1985,E53_Place,numbered_feature,S3,S3 line 297,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: rock shelter 1985
+object_iron,iron,E22_Human-Made_Object,material_culture,S3;S4,S3 line 397,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Iron, iron"
+place_stelae_park,Stelae Park,E53_Place,archaeological_site,S3;S4,S3 line 425,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Stelae Park
+person_laurel_phillipson,Laurel Phillipson,E21_Person,person,S3;S4,S3 line 562,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Laurel Phillipson
+person_jacke_phillips,JACKE PHILLIPS,E21_Person,person,S4,S4 line 18,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: JACKE PHILLIPS, Jacke Phillips"
+object_glass,Glass,E22_Human-Made_Object,material_culture,S4,S4 line 65,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: GLASS, Glass, glass"
+object_beads,beads,E22_Human-Made_Object,material_culture,S4,S4 line 65,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: BEADS, Beads, beads"
+place_l_site,L site,E53_Place,archaeological_site,S4,S4 line 102,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: L site
+place_mestaha_werki,Mestaha Werki,E53_Place,archaeological_site,S4,S4 line 102,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Mestaha Werki
+place_adi_tsehafi,Adi Tsehafi,E53_Place,archaeological_site,S4,S4 line 102,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Adi Tsehafi
+place_tombs_of_kaleb_and_gabra_maskal,Tombs of Kaleb and Gabra Maskal,E53_Place,archaeological_site,S4,S4 line 102,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Tombs of Kaleb and Gabra Maskal
+period_classical_aksumite,Classical Aksumite,E4_Period,chronological_period,S4,S4 line 102,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Classical Aksumite
+feature_trench_d,trench D,E25_Man-Made_Feature,numbered_feature,S4,S4 line 144,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: trench D, trench D7"
+feature_trench_d13,trench D13,E25_Man-Made_Feature,numbered_feature,S4,S4 line 144,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: trench D13, trench D14, trench D15, trench D16, trench D19, trench D23, trench DJ3, trench DJ9, trench Dl3, trench Dl5, trench Dl6, trench Dl9"
+feature_trench_d22,trench D22,E25_Man-Made_Feature,numbered_feature,S4,S4 line 144,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench D22
+period_late_aksumite,Late Aksumite,E4_Period,chronological_period,S4,S4 line 144,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: LATE AKSUMITE, Late Aksumite"
+place_p_site,P site,E53_Place,archaeological_site,S4,S4 line 276,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: P site
+place_gobedra,Gobedra,E53_Place,archaeological_site,S4,S4 line 322,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Gobedra
+place_yeha,Yeha,E53_Place,archaeological_site,S4,S4 line 364,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Yeha
+place_dungur,Dungur,E53_Place,archaeological_site,S4,S4 line 601,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Dungur
+person_gersem,Gersem,E21_Person,person,S4,S4 line 649,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Gersem
+feature_trench_late,trench Late,E25_Man-Made_Feature,numbered_feature,S4,S4 line 671,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: trench Late, trench at"
+feature_trench_in,trench in,E25_Man-Made_Feature,numbered_feature,S4,S4 line 799,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench in
+feature_trench_encompassing,trench encompassing,E25_Man-Made_Feature,numbered_feature,S4,S4 line 811,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench encompassing
+feature_trench_noted,trench noted,E25_Man-Made_Feature,numbered_feature,S4,S4 line 852,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench noted
+feature_trenching,trenching,E25_Man-Made_Feature,numbered_feature,S4,S4 line 1350,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trenching
+feature_trench_laid,trench laid,E25_Man-Made_Feature,numbered_feature,S4,S4 line 1376,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench laid
+feature_trench_cut,trench cut,E25_Man-Made_Feature,numbered_feature,S4,S4 line 1384,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench cut
+feature_trench_b,trench b,E25_Man-Made_Feature,numbered_feature,S4,S4 line 1503,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench b
+feature_trench_was,trench was,E25_Man-Made_Feature,numbered_feature,S4,S4 line 1554,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench was
+feature_trench_or,trench or,E25_Man-Made_Feature,numbered_feature,S4,S4 line 1554,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench or
+period_early_aksumite,Early Aksumite,E4_Period,chronological_period,S4,S4 line 2512,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Early Aksumite
+person_ioel,Ioel,E21_Person,person,S4,S4 line 3004,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Ioel, ioel"
+person_hataz,Hataz,E21_Person,person,S4,S4 line 3004,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Hataz
+person_armah,Armah,E21_Person,person,S4,S4 line 3018,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Armah
+feature_trench_designations,trench designations,E25_Man-Made_Feature,numbered_feature,S4,S4 line 4559,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench designations
+feature_trench_kl,Trench Kl,E25_Man-Made_Feature,numbered_feature,S4,S4 line 4579,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Trench Kl, trench Kl"
+feature_trench_were,trench were,E25_Man-Made_Feature,numbered_feature,S4,S4 line 4634,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench were
+feature_trench_k3,trench K3,E25_Man-Made_Feature,numbered_feature,S4,S4 line 4697,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench K3
+feature_trench_k4,trench K4,E25_Man-Made_Feature,numbered_feature,S4,S4 line 4861,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Trench K4, trench K4"
+feature_tomb_12,tomb 12,E25_Man-Made_Feature,numbered_feature,S4,S4 line 5154,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: tomb 12
+feature_trench_k2,Trench K2,E25_Man-Made_Feature,numbered_feature,S4,S4 line 5997,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Trench K2
+feature_room_7,room 7,E25_Man-Made_Feature,numbered_feature,S4,S4 line 6361,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: room 7
+feature_trench_have,trench have,E25_Man-Made_Feature,numbered_feature,S4,S4 line 6898,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: trench have
+person_aphilas,Aphilas,E21_Person,person,S4,S4 line 8142,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Aphilas
+person_wazeba,Wazeba,E21_Person,person,S4,S4 line 8142,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Wazeba
+person_ousanas,Ousanas,E21_Person,person,S4,S4 line 8142,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Ousanas
+person_israel,Israel,E21_Person,person,S4,S4 line 8339,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Israel
+object_bronze,bronze,E22_Human-Made_Object,material_culture,S4,S4 line 8824,inferred_by_pipeline,0.7,"Tier-1 NER; variants seen: Bronze, bronze"
+person_mhdys,MHDYS,E21_Person,person,S4,S4 line 8970,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: MHDYS
+place_h_site,H site,E53_Place,archaeological_site,S4,S4 line 10584,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: H site
+feature_tomb_8,Tomb 8,E25_Man-Made_Feature,numbered_feature,S4,S4 line 10584,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: Tomb 8
+place_x_site,X site,E53_Place,archaeological_site,S4,S4 line 10631,inferred_by_pipeline,0.7,Tier-1 NER; variants seen: X site
