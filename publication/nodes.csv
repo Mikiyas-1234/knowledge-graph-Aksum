@@ -1,0 +1,52 @@
+node_id,label,crm_class,entity_type,source,page_ref,confidence,bp_age,cal_68pct,cal_95pct,lab_material,notes
+place_aksum,Aksum,E27_Site,place,phillipson_2011,p.30,gold,,,,,Capital city of the Aksumite Kingdom; modern Axum in northern Ethiopia
+place_adulis,Adulis,E27_Site,place,phillipson_2011,p.32,gold,,,,,Principal Red Sea port of the Aksumite Kingdom; near modern Massawa Eritrea
+place_beta_giyorgis,Beta Giyorgis,E27_Site,place,sernicola_2019,p.3,gold,,,,,Hill site on western edge of Aksum; major multi-period occupation sequence
+place_gobedra,Gobedra,E27_Site,place,phillipson_2011,p.33,gold,,,,,Rockshelter site near Aksum; Pre-Aksumite and earlier occupation
+place_matara,Matara,E27_Site,place,phillipson_2011,p.35,gold,,,,,Major Aksumite site in Eritrea; excavated 1959–1965 by Anfray
+place_yeha,Yeha,E27_Site,place,phillipson_2011,p.31,gold,,,,,Pre-Aksumite site ca. 35 km northeast of Aksum; Temple of the Moon
+place_hawulti,Hawulti-Melazo,E27_Site,place,phillipson_2011,p.34,gold,,,,,Site near Aksum with early Aksumite material; stele and votive objects
+place_dungur,Dungur,E27_Site,place,phillipson_1997,p.47,gold,,,,,Locality in western Aksum; site of the Dungur palace complex
+place_mezber,Mezber,E27_Site,place,sernicola_2019,p.8,gold,,,,,Site in the Tigray highlands; Pre-Aksumite and early Aksumite occupation; excavated by Fattovich
+place_ona_nagast,Ona Nagast,E27_Site,place,sernicola_2019,p.5,gold,,,,,Site near Beta Giyorgis; monumental platform structure excavated by Sernicola
+place_nefas_mawcha,Nefas Mawcha,E27_Site,place,phillipson_1997,p.52,gold,,,,,Location of the fallen Great Stele (Stele 1) in the Northern Stelae Field
+place_enda_mikael,Enda Mikael,E27_Site,place,phillipson_1997,p.53,gold,,,,,Locality in Aksum with sub-surface architectural remains excavated 1993–1997
+place_stele_park,Northern Stelae Field,E27_Site,place,phillipson_2011,p.36,gold,,,,,Monumental cemetery zone north of Aksum town centre; UNESCO World Heritage Site
+place_tigray,Tigray region,E27_Site,place,phillipson_2011,p.30,gold,,,,,Northern Ethiopian highland region; core territory of the Aksumite Kingdom
+place_eritrea,Eritrea,E27_Site,place,phillipson_2011,p.30,gold,,,,,Modern state; corresponds broadly to northern periphery of Aksumite territory
+place_mai_shum,Mai Shum,E27_Site,place,phillipson_1997,p.61,gold,,,,,Locality in Aksum; site of a large rock-cut reservoir attributed to the Aksumite period
+person_ezana,King Ezana,E21_Person,person,phillipson_2011,p.37,gold,,,,,Aksumite king r. c. 325–360 CE; issued trilingual inscription; converted to Christianity
+person_kaleb,King Kaleb,E21_Person,person,phillipson_2011,p.38,gold,,,,,Aksumite king r. c. 514–540 CE; led campaign into South Arabia; canonised as saint
+person_endubis,King Endubis,E21_Person,person,phillipson_2011,p.36,gold,,,,,Earliest Aksumite king known to have minted coins; c. late 3rd century CE
+person_phillipson_d,David W. Phillipson,E21_Person,person,phillipson_1997,p.1,gold,,,,,British archaeologist; directed 1993–1997 British Institute in Eastern Africa excavations at Aksum
+person_fattovich,Rodolfo Fattovich,E21_Person,person,phillipson_2011,p.33,gold,,,,,Italian archaeologist; directed excavations at Mezber and Ona Nagast
+person_sernicola,Luisa Sernicola,E21_Person,person,sernicola_2019,p.1,gold,,,,,Italian archaeologist; excavations at Beta Giyorgis and Ona Nagast reported in Sernicola et al. 2019
+person_bard,Kathryn A. Bard,E21_Person,person,phillipson_2011,p.33,gold,,,,,American archaeologist; co-director of Aksum-area survey and excavations
+period_pre_aksumite,Pre-Aksumite period,E4_Period,period,phillipson_2011,p.31,gold,,,,,"c. 800–100 BCE; characterised by South Arabian cultural influences, temple architecture at Yeha"
+period_proto_aksumite,Proto-Aksumite period,E4_Period,period,phillipson_2011,p.31,gold,,,,,"c. 100 BCE–100 CE; transitional phase; reduction of South Arabian influence, emergence of distinctly Aksumite material culture"
+period_early_aksumite,Early Aksumite period,E4_Period,period,phillipson_2011,p.32,gold,,,,,"c. 100–350 CE; growth of urban centre; first coinage (Endubis); monumental stelae erected"
+period_classic_aksumite,Classic Aksumite period,E4_Period,period,phillipson_2011,p.37,gold,,,,,"c. 350–550 CE; apogee of Aksumite power; coinage of Ezana; Christianisation; maximum urban extent"
+period_late_aksumite,Late Aksumite period,E4_Period,period,phillipson_2011,p.38,gold,,,,,"c. 550–700 CE; Aksumite power contracting; decline of Red Sea trade; possible Kaleb-era monumental works"
+period_aksumite,Aksumite period,E4_Period,period,phillipson_2011,p.30,gold,,,,,"c. 1st–7th century CE; general label for the entire span of the kingdom; used when finer periodisation is not attested"
+period_post_aksumite,Post-Aksumite period,E4_Period,period,phillipson_2011,p.39,gold,,,,,"c. 700–1000 CE; period following the fragmentation of centralised Aksumite authority; Lalibela-era antecedents"
+object_stele_1,Great Stele (Stele 1),E22_Man-Made_Object,object,phillipson_1997,p.55,gold,,,,,Tallest Aksumite obelisk at c. 33 m; now fallen and broken; Northern Stelae Field
+object_stele_2,Stele 2,E22_Man-Made_Object,object,phillipson_2011,p.36,gold,,,,,Second-tallest Aksumite obelisk at c. 24 m; removed to Rome 1937; returned to Aksum 2008
+object_stele_3,Stele 3,E22_Man-Made_Object,object,phillipson_2011,p.36,gold,,,,,Third-tallest Aksumite obelisk still standing at Aksum; c. 21 m high
+object_ezana_inscription,Ezana Inscription,E22_Man-Made_Object,object,phillipson_2011,p.37,gold,,,,,Trilingual royal inscription (Ge'ez / Sabaean / Greek) recording Ezana's military campaigns
+object_coin_endubis,Endubis gold coin,E22_Man-Made_Object,object,phillipson_2011,p.36,gold,,,,,Gold coin of King Endubis; earliest known Aksumite coinage type; c. late 3rd century CE
+object_coin_ezana,Ezana coin (pre-Christian),E22_Man-Made_Object,object,phillipson_2011,p.37,gold,,,,,Bronze coin of King Ezana bearing crescent-and-disc symbol before Christianisation
+object_aksumite_pottery,Aksumite fine ware,E22_Man-Made_Object,object,sernicola_2019,p.11,gold,,,,,Handmade buff-ware ceramics characteristic of Aksumite domestic assemblages at Beta Giyorgis
+object_lithics_beta,Beta Giyorgis lithics,E22_Man-Made_Object,object,sernicola_2019,p.6,gold,,,,,Obsidian and chert knapped stone assemblage from Pre-Aksumite levels at Beta Giyorgis
+object_iron_slag,Iron slag assemblage,E22_Man-Made_Object,object,sernicola_2019,p.12,gold,,,,,Iron-working debris recovered from Aksumite activity surfaces at Ona Nagast
+object_glass_beads,Glass bead assemblage,E22_Man-Made_Object,object,phillipson_2011,p.35,gold,,,,,Import trade goods; glass beads of Mediterranean or South Asian origin found at Matara and Adulis
+object_bronze_lamp,Aksumite bronze lamp,E22_Man-Made_Object,object,phillipson_2011,p.37,gold,,,,,Cast bronze lamp of Aksumite type; recovered from urban context at Aksum
+arch_mausoleum,Mausoleum (Tomb of Brick Arches),E25_Man-Made_Feature,architectural_feature,phillipson_1997,p.57,gold,,,,,Subterranean royal tomb complex beneath the Northern Stelae Field; multiple chambers
+arch_dungur_palace,Dungur palace,E25_Man-Made_Feature,architectural_feature,phillipson_1997,p.47,gold,,,,,"Large multi-roomed stone structure at Dungur; interpreted as an elite residence or palace, c. 4th–6th century CE"
+arch_church_maryam,Church of St. Mary of Zion,E25_Man-Made_Feature,architectural_feature,phillipson_2011,p.38,gold,,,,,Cathedral attributed to 4th-century construction under Ezana; rebuilt multiple times; legendary Ark repository
+arch_beta_giyorgis_terrace,Beta Giyorgis terrace complex,E25_Man-Made_Feature,architectural_feature,sernicola_2019,p.4,gold,,,,,Sequence of artificial terraces on the slopes of Beta Giyorgis hill; Pre-Aksumite to Aksumite occupation
+arch_platform_ona_nagast,Ona Nagast platform structure,E25_Man-Made_Feature,architectural_feature,sernicola_2019,p.5,gold,,,,,Monumental stone-built platform at Ona Nagast; possibly a Proto-Aksumite ceremonial structure
+arch_tomb_kaleb,Tomb of Kaleb and Gebre Meskel,E25_Man-Made_Feature,architectural_feature,phillipson_2011,p.38,gold,,,,,Rock-cut tomb complex traditionally attributed to King Kaleb and his son; in northern Aksum
+c14_beta1_oxf,OxA-7846 charcoal Beta Giyorgis,E16_Measurement,radiocarbon,phillipson_1997,p.615,gold,2150 ± 35,200–120 BCE,370–70 BCE,charcoal,Layer 4 Beta Giyorgis; Proto-Aksumite context; calibrated using IntCal20
+c14_beta2_oxf,OxA-7847 charcoal Beta Giyorgis,E16_Measurement,radiocarbon,phillipson_1997,p.615,gold,1750 ± 40,240–330 CE,210–390 CE,charcoal,Layer 2 Beta Giyorgis; Early Aksumite context; calibrated using IntCal20
+c14_dungur_beta,Beta-95230 organic Dungur,E16_Measurement,radiocarbon,phillipson_1997,p.617,gold,1450 ± 35,560–650 CE,530–680 CE,organic material,Floor context Dungur palace; Classic/Late Aksumite; calibrated using IntCal20
+c14_gobedra_1,OxA-1023 charcoal Gobedra,E16_Measurement,radiocarbon,phillipson_1997,p.619,gold,2650 ± 45,820–760 BCE,900–690 BCE,charcoal,Gobedra rockshelter; Pre-Aksumite Iron Age context; calibrated using IntCal20
