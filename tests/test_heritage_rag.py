@@ -252,5 +252,94 @@ ATTRIBUTION:Provided by the Hill Museum & Manuscript Library
         self.assertEqual(unmapped, {"_unrecognised": {"mystery field": "xyz"}})
 
 
+class BetaMasaheftTests(unittest.TestCase):
+    TEI = """<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="WRONG" type="mss"><teiHeader><fileDesc>
+<titleStmt><title>Test Gospels</title></titleStmt>
+<sourceDesc><msDesc xml:id="ms">
+ <msIdentifier><repository ref="INS9999TST"/><idno>Test 1</idno><altIdentifier><idno>Old 7</idno></altIdentifier></msIdentifier>
+ <msContents><msItem xml:id="i1"><title ref="LIT0001Test"/><msItem xml:id="i1.1"><title ref="LIT0002Sub#part"/></msItem></msItem></msContents>
+ <physDesc><objectDesc><supportDesc><support><material key="parchment"/></support></supportDesc></objectDesc>
+  <bindingDesc><binding><decoNote><material key="leather"/></decoNote></binding></bindingDesc></physDesc>
+ <history><origin><origPlace><placeName ref="LOC0001Test"/></origPlace>
+   <origDate notBefore="1400" notAfter="1450-12-31"/><origDate/><origDate when="sometime"/></origin>
+  <provenance><persName role="owner" ref="PRS0001Own"/></provenance></history>
+ <additional><adminInfo/></additional>
+ <msPart xml:id="p1"><history><origin><origDate notBefore="1200" notAfter="1300"/></origin></history></msPart>
+ <msContents><summary><persName role="scribe" ref="PRS0002Scr"/><persName role="patron">Unlinked Name</persName>
+  <persName role="scribe donor" ref="PRS0003Two"/></summary></msContents>
+</msDesc></sourceDesc></fileDesc></teiHeader></TEI>"""
+
+    def run_one(self, name="Dir/Test1.xml"):
+        import xml.etree.ElementTree as ET
+        from collections import Counter
+        from heritage_rag import betamasaheft as bm
+        nodes, edges, stats = {}, [], Counter()
+        ok = bm.tei_to_graph(ET.fromstring(self.TEI), name, nodes, edges, stats)
+        return ok, nodes, edges, stats
+
+    def rels(self, edges):
+        return sorted((e["relationship"], e["target"]) for e in edges)
+
+    def test_mapping(self):
+        ok, nodes, edges, stats = self.run_one()
+        self.assertTrue(ok)
+        self.assertEqual(self.rels(edges), sorted([
+            ("HELD_AT", "place_ins9999tst"), ("PRODUCED_AT", "place_loc0001test"), ("MADE_OF", "material_parchment"),
+            ("CONTAINS_TEXT", "text_lit0001test"), ("CONTAINS_TEXT", "text_lit0002sub"),
+            ("DATED_TO", "period_1400_1450_ce"), ("COPIED_BY", "person_prs0002scr"), ("COPIED_BY", "person_prs0003two")]))
+
+    def test_identity_comes_from_filename_not_xml_id(self):
+        ok, nodes, edges, stats = self.run_one()
+        self.assertIn("manuscript_test1", nodes)
+        self.assertEqual(stats["xml_id_differs_from_filename"], 1)
+        self.assertIn("Test 1", nodes["manuscript_test1"]["aliases"])
+        self.assertIn("Old 7", nodes["manuscript_test1"]["aliases"])
+
+    def test_binding_material_and_part_dates_are_not_attached(self):
+        _, nodes, edges, stats = self.run_one()
+        self.assertNotIn("material_leather", nodes)
+        self.assertNotIn("period_1200_1300_ce", nodes)
+        self.assertEqual(stats["part_dates_not_attached"], 1)
+
+    def test_unmapped_things_are_counted_not_guessed(self):
+        _, nodes, edges, stats = self.run_one()
+        self.assertEqual(stats["role_not_mapped:owner"], 1)
+        self.assertEqual(stats["role_not_mapped:donor"], 1)
+        self.assertEqual(stats["patron_without_ref"], 1)
+        self.assertEqual(stats["date_element_empty"], 1)
+        self.assertEqual(stats["date_unreadable"], 1)
+        self.assertNotIn("person_unlinked_name", nodes)
+
+    def test_year_parsing(self):
+        from heritage_rag.betamasaheft import _year
+        self.assertEqual([_year(x) for x in ("0530", "1800-10", "1919-05-24", "17-18 century", "", None)],
+                         [530, 1800, 1919, None, None, None])
+
+    def test_duplicate_id_is_skipped(self):
+        import xml.etree.ElementTree as ET
+        from collections import Counter
+        from heritage_rag import betamasaheft as bm
+        nodes, edges, stats = {}, [], Counter()
+        root = ET.fromstring(self.TEI)
+        self.assertTrue(bm.tei_to_graph(root, "A/Test1.xml", nodes, edges, stats))
+        self.assertFalse(bm.tei_to_graph(root, "B/Test1.xml", nodes, edges, stats))
+        self.assertEqual(stats["duplicate_manuscript_id_skipped"], 1)
+
+    def test_file_without_msdesc_is_skipped(self):
+        import xml.etree.ElementTree as ET
+        from collections import Counter
+        from heritage_rag import betamasaheft as bm
+        stats = Counter()
+        root = ET.fromstring('<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader/></TEI>')
+        self.assertFalse(bm.tei_to_graph(root, "X.xml", {}, [], stats))
+        self.assertEqual(stats["skipped_no_msDesc"], 1)
+
+    def test_graph_is_searchable_by_shelfmark_alias(self):
+        _, nodes, edges, _ = self.run_one()
+        g = InMemoryGraph(nodes, edges)
+        self.assertEqual(g.find_nodes("old 7", allowed_levels("public"))[0]["id"], "manuscript_test1")
+
+
 if __name__ == "__main__":
     unittest.main()

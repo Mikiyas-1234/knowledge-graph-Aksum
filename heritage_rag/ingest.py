@@ -5,8 +5,8 @@ from .schema import CLASS_BY_TYPE, RELATIONSHIPS, NODE_COLUMNS, EDGE_COLUMNS, ma
 REQUIRED = ("shelfmark", "source_document", "source_locator")
 
 
-def _node(nodes, node_type, label, row, category, aliases="", notes=""):
-    nid = make_id(node_type, label)
+def _node(nodes, node_type, label, row, category, aliases="", notes="", node_id=None):
+    nid = node_id or make_id(node_type, label)
     if nid not in nodes:
         nodes[nid] = {
             "id": nid, "label": label, "cidoc_class": CLASS_BY_TYPE[node_type], "category": category,

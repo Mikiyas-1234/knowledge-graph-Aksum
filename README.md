@@ -13,3 +13,4 @@ Extends this graph with Geez manuscripts. Run the tests with `python3 -m unittes
 - `ocr.py` wraps Tesseract and scores any OCR engine against expert transcriptions (character error rate, Ethiopic share). No engine is trusted for Geez until scored on your own scans.
 - `extract.py` asks an LLM for relations and keeps a claim only if its quote appears verbatim in the page; kept claims are candidate edges (confidence 0.4) for expert review.
 - `vhmml.py` loads vHMML reading-room records; stubs load at confidence 0.5.
+- `betamasaheft.py` reads the Beta maṣāḥǝft Manuscripts TEI corpus (CC BY-SA 4.0). Run `python3 -m heritage_rag.betamasaheft <clone-dir> <out-dir>`; a full build takes about 5–6 minutes. Output is not committed: it is derived from CC BY-SA data and needs attribution and the same licence.
