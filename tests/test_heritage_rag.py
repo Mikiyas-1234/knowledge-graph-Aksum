@@ -211,5 +211,46 @@ class ExtractTests(unittest.TestCase):
         self.assertEqual((ok, bad[0][1]), ([], "unparseable model output"))
 
 
+class VhmmlPageTextTests(unittest.TestCase):
+    PAGE = """LABEL:GG 00041
+COUNTRY:Ethiopia
+CITY:Tegrāy Province
+REPOSITORY:Gunda Gundē Monastery
+HMML PROJECT NUMBER:GG 00041
+RIGHTS LINK:https://www.vhmml.org/terms
+PERMALINK:https://w3id.org/vhmml/readingRoom/view/500916
+IIIF LINK:https://www.vhmml.org/image/manifest/500916
+RIGHTS:
+ATTRIBUTION:Provided by the Hill Museum & Manuscript Library
+"""
+
+    def test_page_text_without_shelfmark_loads_by_project_number(self):
+        from heritage_rag import vhmml
+        rec = vhmml.parse_page_text(self.PAGE)
+        self.assertEqual(rec["repository"], {"name": "Gunda Gundē Monastery"})
+        self.assertEqual(rec["iiifManifest"], "https://www.vhmml.org/image/manifest/500916")
+        row, unmapped = vhmml.to_catalogue_row(rec)
+        self.assertEqual(row["shelfmark"], "Gunda Gundē Monastery GG 00041")
+        self.assertEqual(unmapped, {})
+        self.assertIn("500916", row["extra_notes"])
+        nodes, edges, rejected = ingest.build_graph([row])
+        self.assertEqual(rejected, [])
+        self.assertIn("place_gunda_gunde_monastery", nodes)
+        self.assertEqual([e["relationship"] for e in edges], ["HELD_AT"])
+
+    def test_tab_format_with_viaf_suffix(self):
+        from heritage_rag import vhmml
+        rec = vhmml.parse_page_text("Repository\tNational Archives VIAF\nShelfmark\tMS 362\nHMML Proj. Num.\tEMML 7385\nNotes\tThis is a stub record with provisional metadata.")
+        self.assertEqual(rec["repository"]["name"], "National Archives")
+        row, _ = vhmml.to_catalogue_row(rec)
+        self.assertEqual(row["confidence"], 0.5)
+
+    def test_unknown_page_keys_are_reported(self):
+        from heritage_rag import vhmml
+        rec = vhmml.parse_page_text("Shelfmark:MS 1\nMystery Field:xyz")
+        _, unmapped = vhmml.to_catalogue_row(rec)
+        self.assertEqual(unmapped, {"_unrecognised": {"mystery field": "xyz"}})
+
+
 if __name__ == "__main__":
     unittest.main()
