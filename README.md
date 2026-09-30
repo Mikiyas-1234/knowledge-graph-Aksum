@@ -10,3 +10,6 @@ Extends this graph with Geez manuscripts. Run the tests with `python3 -m unittes
 - `access.py` + `store.py` filter nodes and edges by role inside the query, so restricted data never reaches the LLM.
 - `agent.py` plans, retrieves, reports uncovered domains and cites sources; the LLM (for example Ollama) is injected.
 - `data/sample_catalogue.csv` is a synthetic fixture (`TEST-MS-*`), not real manuscripts.
+- `ocr.py` wraps Tesseract and scores any OCR engine against expert transcriptions (character error rate, Ethiopic share). No engine is trusted for Geez until scored on your own scans.
+- `extract.py` asks an LLM for relations and keeps a claim only if its quote appears verbatim in the page; kept claims are candidate edges (confidence 0.4) for expert review.
+- `vhmml.py` loads vHMML reading-room records; stubs load at confidence 0.5.

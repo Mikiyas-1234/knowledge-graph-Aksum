@@ -147,5 +147,69 @@ class VhmmlTests(unittest.TestCase):
             vhmml.to_catalogue_row({"id": 2})
 
 
+class OcrTests(unittest.TestCase):
+    def test_cer(self):
+        from heritage_rag.ocr import cer
+        self.assertEqual(cer("abcd", "abcd"), 0.0)
+        self.assertEqual(cer("abcd", "abxd"), 0.25)
+        self.assertEqual(cer("ሀሁ ሂ", "ሀሁ   ሂ"), 0.0)  # whitespace runs ignored
+        with self.assertRaises(ValueError):
+            cer("", "x")
+
+    def test_ethiopic_ratio_flags_latin_output(self):
+        from heritage_rag.ocr import ethiopic_ratio
+        self.assertEqual(ethiopic_ratio("ሀሁሂ"), 1.0)
+        self.assertEqual(ethiopic_ratio("abc"), 0.0)
+        self.assertEqual(ethiopic_ratio("1234"), 0.0)
+
+    def test_evaluate_sorts_worst_first(self):
+        from heritage_rag.ocr import evaluate
+        fake = {"p1": "abcd", "p2": "wxyz"}
+        out = evaluate(lambda p: fake[p], [("p1", "abcd"), ("p2", "abcd")])
+        self.assertEqual(out["pages"][0]["page"], "p2")
+        self.assertEqual(out["mean_cer"], 0.5)
+
+    def test_missing_binary_gives_clear_error(self):
+        from heritage_rag.ocr import TesseractOcr
+        with self.assertRaisesRegex(RuntimeError, "not installed"):
+            TesseractOcr(binary="definitely-not-a-binary")("x.png")
+
+
+class ExtractTests(unittest.TestCase):
+    TEXT = "Scribe Alpha copied this book at Test Island Church in the year 1450."
+
+    def llm(self, claims):
+        return lambda _: json.dumps({"claims": claims})
+
+    GOOD = {"subject": "Test Book", "subject_type": "manuscript", "relation": "COPIED_BY",
+            "object": "Scribe Alpha", "object_type": "person", "quote": "Scribe Alpha copied this book"}
+
+    def test_grounded_claim_becomes_candidate_edge(self):
+        from heritage_rag import extract
+        ok, bad = extract.extract_claims(self.llm([self.GOOD]), self.TEXT)
+        self.assertEqual((len(ok), bad), (1, []))
+        nodes, edges = extract.to_candidate_rows(ok, "TEST-DOC", "p.1")
+        self.assertEqual(edges[0]["confidence"], 0.4)
+        self.assertEqual(edges[0]["evidence_type"], "llm_extraction")
+        self.assertIn("person_scribe_alpha", nodes)
+
+    def test_invented_quote_is_rejected(self):
+        from heritage_rag import extract
+        fake = dict(self.GOOD, quote="Scribe Alpha was born in 1400")
+        ok, bad = extract.extract_claims(self.llm([fake]), self.TEXT)
+        self.assertEqual((ok, bad[0][1]), ([], "quote not found in text"))
+
+    def test_unknown_relation_and_type_rejected(self):
+        from heritage_rag import extract
+        ok, bad = extract.extract_claims(self.llm([dict(self.GOOD, relation="LOVED_BY"),
+                                                   dict(self.GOOD, object_type="alien")]), self.TEXT)
+        self.assertEqual([r for _, r in bad], ["unknown relation", "unknown entity type"])
+
+    def test_garbage_output_is_handled(self):
+        from heritage_rag import extract
+        ok, bad = extract.extract_claims(lambda _: "not json", self.TEXT)
+        self.assertEqual((ok, bad[0][1]), ([], "unparseable model output"))
+
+
 if __name__ == "__main__":
     unittest.main()
