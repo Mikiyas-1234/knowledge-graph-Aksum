@@ -382,5 +382,42 @@ class BmNamesTests(unittest.TestCase):
         self.assertEqual(len(g.find_nodes("LIT0001Gospel", {"public"})), 1)
 
 
+class IncomingTests(unittest.TestCase):
+    def graph(self):
+        nodes = {"m1": {"id": "m1", "label": "MS One", "access_level": "public", "aliases": ""},
+                 "m2": {"id": "m2", "label": "MS Two", "access_level": "restricted", "aliases": ""},
+                 "m3": {"id": "m3", "label": "MS Three", "access_level": "public", "aliases": ""},
+                 "w": {"id": "w", "label": "Four Gospels", "access_level": "public", "aliases": ""}}
+        def e(src, lvl="public"):
+            return {"source": src, "target": "w", "relationship": "CONTAINS_TEXT", "access_level": lvl,
+                    "source_document": "D", "source_locator": src}
+        return InMemoryGraph(nodes, [e("m1"), e("m2", "restricted"), e("m3")])
+
+    def test_incoming_respects_access(self):
+        g = self.graph()
+        self.assertEqual({s["id"] for _, s in g.incoming("w", {"public"})}, {"m1", "m3"})
+        self.assertEqual({s["id"] for _, s in g.incoming("w", {"public", "restricted"})}, {"m1", "m2", "m3"})
+
+    def test_which_manuscripts_contain_a_work(self):
+        g = self.graph()
+        llm = lambda p: json.dumps({"terms": ["Four Gospels"], "domains": ["manuscript"]}) if p.startswith("Return JSON") else "ok"
+        out = agent.answer(g, llm, "Which manuscripts contain the Four Gospels?")
+        self.assertEqual(sorted(c[1] for c in out["citations"]), ["m1", "m3"])
+        self.assertEqual(out["dropped"], 0)
+
+    def test_cap_is_reported_not_silent(self):
+        g = self.graph()
+        ev, dropped = agent.retrieve(g, ["Four Gospels"], {"public"}, per_node=1)
+        self.assertEqual((len(ev), dropped), (1, 1))
+
+
+class RankingTests(unittest.TestCase):
+    def test_exact_match_beats_partial_even_when_later(self):
+        nodes = {f"p{i}": {"id": f"p{i}", "label": f"Gospels of Place {i}", "access_level": "public", "aliases": ""} for i in range(5)}
+        nodes["w"] = {"id": "w", "label": "Gospels", "access_level": "public", "aliases": ""}
+        g = InMemoryGraph(nodes, [])
+        self.assertEqual(g.find_nodes("gospels", {"public"}, limit=2)[0]["id"], "w")
+
+
 if __name__ == "__main__":
     unittest.main()

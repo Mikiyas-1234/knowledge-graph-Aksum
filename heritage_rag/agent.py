@@ -36,17 +36,24 @@ def plan(llm, question):
     return {"terms": terms or [question], "domains": domains or ["manuscript"]}
 
 
-def retrieve(graph, terms, levels):
-    evidence, seen = [], set()
+def retrieve(graph, terms, levels, per_node=25):
+    """Follows edges out of and into every matching node. Returns (evidence, dropped).
+
+    `dropped` counts edges cut by the per-node cap (a work held by thousands of manuscripts would
+    otherwise flood the prompt); the answer reports it so the cut is never silent.
+    """
+    evidence, seen, dropped = [], set(), 0
     for term in terms:
         for node in graph.find_nodes(term, levels):
-            for edge, target in graph.neighbours(node["id"], levels):
-                key = (edge["source"], edge["relationship"], edge["target"])
-                if key not in seen:
-                    seen.add(key)
-                    evidence.append({"from": generalise_place(node, levels), "edge": edge,
-                                     "to": generalise_place(target, levels)})
-    return evidence
+            found = [(e, node, t) for e, t in graph.neighbours(node["id"], levels)]
+            found += [(e, s, node) for e, s in graph.incoming(node["id"], levels)]
+            fresh = [f for f in found if (f[0]["source"], f[0]["relationship"], f[0]["target"]) not in seen]
+            dropped += max(0, len(fresh) - per_node)
+            for edge, src, tgt in fresh[:per_node]:
+                seen.add((edge["source"], edge["relationship"], edge["target"]))
+                evidence.append({"from": generalise_place(src, levels), "edge": edge,
+                                 "to": generalise_place(tgt, levels)})
+    return evidence, dropped
 
 
 def coverage(evidence, wanted):
@@ -58,14 +65,14 @@ def coverage(evidence, wanted):
 def answer(graph, llm, question, role="public"):
     levels = allowed_levels(role)
     p = plan(llm, question)
-    evidence = retrieve(graph, p["terms"], levels)
+    evidence, dropped = retrieve(graph, p["terms"], levels)
     gaps = coverage(evidence, p["domains"])
     if not evidence:
         return {"answer": "No records available to this role match the question.",
-                "citations": [], "gaps": gaps, "plan": p}
+                "citations": [], "gaps": gaps, "plan": p, "dropped": dropped}
     facts = "\n".join(f'- {e["from"]["label"]} {e["edge"]["relationship"]} {e["to"]["label"]} '
                       f'[{e["edge"]["source_document"]} {e["edge"]["source_locator"]}]' for e in evidence)
     text = llm("Answer using only these facts and cite the bracketed sources. "
                f"Say if the facts are insufficient.\nFacts:\n{facts}\nQuestion: {question}")
     cites = sorted({(e["edge"]["source_document"], e["edge"]["source_locator"]) for e in evidence})
-    return {"answer": text, "citations": cites, "gaps": gaps, "plan": p}
+    return {"answer": text, "citations": cites, "gaps": gaps, "plan": p, "dropped": dropped}
