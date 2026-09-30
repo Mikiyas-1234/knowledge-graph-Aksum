@@ -116,5 +116,36 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(p, {"terms": ["question?"], "domains": ["manuscript"]})
 
 
+class VhmmlTests(unittest.TestCase):
+    """Synthetic record shaped like a vHMML stub (the real file is not committed: see vHMML terms)."""
+    REC = {"id": 1, "PURL": "https://example.org/1", "rights": "https://example.org/terms", "shelfMark": "MS 1",
+           "notes": "<p>This is a stub record with provisional metadata.</p>", "hmmlProjectNumber": "TEST 1",
+           "accessRestriction": "Unregistered", "support": "", "currentStatus": "Unknown",
+           "repository": {"id": 9, "name": "Test Archive", "authorityUriLC": "https://id.example/lc"},
+           "extents": [], "genres": [], "objectContributors": [], "parts": []}
+
+    def test_stub_is_low_confidence_and_nothing_is_invented(self):
+        from heritage_rag import vhmml
+        row, unmapped = vhmml.to_catalogue_row(self.REC)
+        nodes, edges, rejected = ingest.build_graph([row])
+        self.assertEqual(rejected, [])
+        ms = nodes["manuscript_test_archive_ms_1"]
+        self.assertEqual((ms["confidence"], ms["epistemic_provenance"]), (0.5, "catalogue_stub"))
+        self.assertEqual({e["relationship"] for e in edges}, {"HELD_AT"})
+        self.assertEqual(unmapped, {})
+        self.assertIn("TEST 1", ms["aliases"])
+
+    def test_filled_unknown_fields_are_reported_not_guessed(self):
+        from heritage_rag import vhmml
+        rec = dict(self.REC, objectContributors=[{"x": 1}], somethingNew="a")
+        _, unmapped = vhmml.to_catalogue_row(rec)
+        self.assertEqual(set(unmapped), {"objectContributors", "somethingNew"})
+
+    def test_missing_shelfmark_raises(self):
+        from heritage_rag import vhmml
+        with self.assertRaises(ValueError):
+            vhmml.to_catalogue_row({"id": 2})
+
+
 if __name__ == "__main__":
     unittest.main()

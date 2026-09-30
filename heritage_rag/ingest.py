@@ -11,7 +11,8 @@ def _node(nodes, node_type, label, row, category, aliases="", notes=""):
         nodes[nid] = {
             "id": nid, "label": label, "cidoc_class": CLASS_BY_TYPE[node_type], "category": category,
             "source_document": row["source_document"], "source_locator": row["source_locator"],
-            "epistemic_provenance": "catalogue_record", "confidence": 1.0, "notes": notes,
+            "epistemic_provenance": row.get("epistemic_provenance") or "catalogue_record",
+            "confidence": float(row.get("confidence") or 1.0), "notes": notes,
             "aliases": aliases, "access_level": row["access_level"], "domain": "manuscript",
         }
     elif row["access_level"] != PUBLIC:
@@ -24,7 +25,7 @@ def _edge(edges, src, tgt, rel, row, evidence="catalogue_record"):
     edges.append({
         "source": src, "target": tgt, "relationship": rel, "cidoc_property": RELATIONSHIPS[rel],
         "source_document": row["source_document"], "source_locator": row["source_locator"],
-        "evidence_type": evidence, "confidence": 1.0, "notes": "", "access_level": row["access_level"],
+        "evidence_type": evidence, "confidence": float(row.get("confidence") or 1.0), "notes": "", "access_level": row["access_level"],
     })
 
 
@@ -32,7 +33,7 @@ def build_graph(rows):
     """Returns (nodes, edges). Rows missing a citation are rejected, not guessed."""
     nodes, edges, rejected = {}, [], []
     for i, raw in enumerate(rows, start=1):
-        row = {k: (v or "").strip() for k, v in raw.items()}
+        row = {k: ("" if v is None else str(v)).strip() for k, v in raw.items()}
         missing = [c for c in REQUIRED if not row.get(c)]
         row["access_level"] = row.get("access_level") or PUBLIC
         if row["access_level"] not in ACCESS_LEVELS:
@@ -42,8 +43,8 @@ def build_graph(rows):
             continue
         ms = _node(nodes, "manuscript", row["shelfmark"], row, "manuscript",
                    aliases=row.get("alt_titles", ""),
-                   notes="; ".join(x for x in (row.get("title", ""), row.get("language", ""),
-                                               row.get("script", ""), row.get("scan_uri", "")) if x))
+                   notes="; ".join(x for x in (row.get("title", ""), row.get("language", ""), row.get("script", ""),
+                                               row.get("scan_uri", ""), row.get("extra_notes", "")) if x))
         if row.get("title"):
             tx = _node(nodes, "text", row["title"], row, "work", aliases=row.get("alt_titles", ""))
             _edge(edges, ms, tx, "CONTAINS_TEXT", row)
@@ -52,7 +53,8 @@ def build_graph(rows):
                  ("repository", "place", "repository", "HELD_AT"), ("material", "material", "material", "MADE_OF"))
         for col, ntype, cat, rel in links:
             if row.get(col):
-                _edge(edges, ms, _node(nodes, ntype, row[col], row, cat), rel, row)
+                notes = row.get("repository_uri", "") if col == "repository" else ""
+                _edge(edges, ms, _node(nodes, ntype, row[col], row, cat, notes=notes), rel, row)
         if row.get("date_from") or row.get("date_to"):
             label = f"{row.get('date_from', '?')}-{row.get('date_to', '?')} CE"
             _edge(edges, ms, _node(nodes, "period", label, row, "date_range"), "DATED_TO", row)
