@@ -341,5 +341,46 @@ class BetaMasaheftTests(unittest.TestCase):
         self.assertEqual(g.find_nodes("old 7", allowed_levels("public"))[0]["id"], "manuscript_test1")
 
 
+class BmNamesTests(unittest.TestCase):
+    WORK = """<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc><titleStmt>
+<title xml:lang="gez">አርባዕቱ፡ ወንገል፡</title><title>Four Gospels</title></titleStmt></fileDesc></teiHeader>
+<text><body/></text></TEI>"""
+
+    def write(self, d, name, xml):
+        with open(os.path.join(d, name), "w", encoding="utf-8") as f:
+            f.write(xml)
+
+    def test_latin_title_is_label_and_geez_is_alias(self):
+        from heritage_rag import bm_names
+        with tempfile.TemporaryDirectory() as d:
+            self.write(d, "LIT0001Gospel.xml", self.WORK)
+            self.write(d, "PRS0001X.xml", self.WORK.replace("Four Gospels", "Placeholder record"))
+            names = bm_names.load_names([d])
+        self.assertEqual(names["LIT0001Gospel"][0], "Four Gospels")
+        self.assertIn("አርባዕቱ፡ ወንገል፡", names["LIT0001Gospel"][1])
+        self.assertNotIn("PRS0001X", names)  # placeholder, and its Geez title alone is not trusted as a name either
+
+    def test_apply_names_relabels_keeps_id_and_adds_id_alias(self):
+        from heritage_rag import bm_names
+        nodes = {"text_lit0001gospel": {"id": "text_lit0001gospel", "label": "LIT0001Gospel", "category": "work",
+                                        "aliases": "", "notes": "x"},
+                 "text_lit9999none": {"id": "text_lit9999none", "label": "LIT9999None", "category": "work",
+                                      "aliases": "", "notes": "x"}}
+        n = bm_names.apply_names(nodes, {"LIT0001Gospel": ("Four Gospels", ["Tetraevangelium"])})
+        self.assertEqual(n, 1)
+        self.assertEqual(nodes["text_lit0001gospel"]["label"], "Four Gospels")
+        self.assertEqual(nodes["text_lit0001gospel"]["aliases"], "LIT0001Gospel;Tetraevangelium")
+        self.assertEqual(nodes["text_lit9999none"]["label"], "LIT9999None")
+
+    def test_relabelled_node_is_found_by_name_and_by_id(self):
+        from heritage_rag import bm_names
+        nodes = {"text_lit0001gospel": {"id": "text_lit0001gospel", "label": "LIT0001Gospel", "category": "work",
+                                        "aliases": "", "notes": "x", "access_level": "public"}}
+        bm_names.apply_names(nodes, {"LIT0001Gospel": ("Four Gospels", [])})
+        g = InMemoryGraph(nodes, [])
+        self.assertEqual(len(g.find_nodes("four gospels", {"public"})), 1)
+        self.assertEqual(len(g.find_nodes("LIT0001Gospel", {"public"})), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

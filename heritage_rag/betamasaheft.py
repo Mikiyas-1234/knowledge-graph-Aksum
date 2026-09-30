@@ -153,9 +153,14 @@ def main(argv=None):
     ap.add_argument("repo_dir")
     ap.add_argument("out_dir")
     ap.add_argument("--limit", type=int)
+    ap.add_argument("--names", nargs="*", default=[], help="clones of the Institutions, Persons and Works repositories")
     args = ap.parse_args(argv)
     os.makedirs(args.out_dir, exist_ok=True)
     nodes, edges, stats = build_from_dir(args.repo_dir, args.limit)
+    if args.names:
+        from . import bm_names
+        names = bm_names.load_names(args.names, stats)
+        bm_names.apply_names(nodes, names, stats)
     ingest.write_graph(nodes, edges, args.out_dir)
     print(f"{len(nodes)} nodes, {len(edges)} edges")
     for k, v in sorted(stats.items()):
