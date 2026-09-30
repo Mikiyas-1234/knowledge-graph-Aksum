@@ -14,6 +14,12 @@ def search_names(node):
     return ";".join(dict.fromkeys(x for x in (normalise(n) for n in names) if x))
 
 
+def _edge_order(row):
+    """Deterministic edge order (relationship, other node id, locator), shared by every backend."""
+    edge, other = row
+    return (edge["relationship"], other["id"], edge["source_locator"])
+
+
 class InMemoryGraph:
     def __init__(self, nodes, edges):
         self.nodes = dict(nodes)
@@ -24,19 +30,26 @@ class InMemoryGraph:
             self.inc[e["target"]].append(e)
 
     def find_nodes(self, text, levels, limit=10):
-        """Exact name or alias matches rank before partial ones, so the cut at `limit` keeps the best."""
+        """Normalised name/alias match. Rank: exact match, then more connections, then id.
+
+        The connection count makes a work held by many manuscripts outrank any single manuscript that
+        shares its title, and the id tie-break makes the order identical in every backend.
+        """
         from .resolution import normalise
         q = normalise(text)
-        exact, partial = [], []
+        if not q:
+            return []
+        hits = []
         for n in self.nodes.values():
-            if n["access_level"] not in levels or not q:
+            if n["access_level"] not in levels:
                 continue
-            names = [normalise(x) for x in [n["label"], *[a for a in n.get("aliases", "").split(";") if a.strip()]]]
+            names = search_names(n).split(";")
             if q in names:
-                exact.append(n)
+                hits.append((0, n))
             elif any(q in x for x in names):
-                partial.append(n)
-        return (exact + partial)[:limit]
+                hits.append((1, n))
+        hits.sort(key=lambda h: (h[0], -(len(self.out.get(h[1]["id"], [])) + len(self.inc.get(h[1]["id"], []))), h[1]["id"]))
+        return [n for _, n in hits[:limit]]
 
     def neighbours(self, node_id, levels):
         rows = []
@@ -44,7 +57,7 @@ class InMemoryGraph:
             tgt = self.nodes.get(e["target"])
             if tgt and e["access_level"] in levels and tgt["access_level"] in levels:
                 rows.append((e, tgt))
-        return rows
+        return sorted(rows, key=_edge_order)
 
 
     def incoming(self, node_id, levels):
@@ -54,7 +67,7 @@ class InMemoryGraph:
             src = self.nodes.get(e["source"])
             if src and e["access_level"] in levels and src["access_level"] in levels:
                 rows.append((e, src))
-        return rows
+        return sorted(rows, key=_edge_order)
 
 
 class Neo4jGraph:
@@ -99,25 +112,27 @@ class Neo4jGraph:
                     s.run("MATCH ()-[r]->() RETURN count(r) AS c").single()["c"])
 
     def find_nodes(self, text, levels, limit=10):
-        """Same rule as InMemoryGraph: normalised name/alias match, exact matches ranked first."""
+        """Same rule and ranking as InMemoryGraph.find_nodes."""
         from .resolution import normalise
         q = normalise(text)
         if not q:
             return []
         cypher = ("MATCH (n:Entity) WHERE n.access_level IN $levels AND n.search_names CONTAINS $q "
-                  "RETURN n ORDER BY CASE WHEN (';' + n.search_names + ';') CONTAINS (';' + $q + ';') THEN 0 ELSE 1 END "
-                  "LIMIT $limit")
+                  "WITH n, CASE WHEN (';' + n.search_names + ';') CONTAINS (';' + $q + ';') THEN 0 ELSE 1 END AS exact, "
+                  "COUNT { (n)--() } AS degree RETURN n ORDER BY exact, degree DESC, n.id LIMIT $limit")
         with self._driver.session() as s:
             return [dict(r["n"]) for r in s.run(cypher, q=q, levels=sorted(levels), limit=limit)]
 
     def neighbours(self, node_id, levels):
         q = ("MATCH (a:Entity {id: $id})-[e]->(b:Entity) "
-             "WHERE e.access_level IN $levels AND b.access_level IN $levels RETURN e, b")
+             "WHERE e.access_level IN $levels AND b.access_level IN $levels "
+             "RETURN e, b ORDER BY type(e), b.id, e.source_locator")
         with self._driver.session() as s:
             return [(dict(r["e"]), dict(r["b"])) for r in s.run(q, id=node_id, levels=sorted(levels))]
 
     def incoming(self, node_id, levels):
         q = ("MATCH (a:Entity)-[e]->(b:Entity {id: $id}) "
-             "WHERE e.access_level IN $levels AND a.access_level IN $levels RETURN e, a")
+             "WHERE e.access_level IN $levels AND a.access_level IN $levels "
+             "RETURN e, a ORDER BY type(e), a.id, e.source_locator")
         with self._driver.session() as s:
             return [(dict(r["e"]), dict(r["a"])) for r in s.run(q, id=node_id, levels=sorted(levels))]

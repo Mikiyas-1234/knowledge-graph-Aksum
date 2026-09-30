@@ -54,17 +54,15 @@ class ParityTests(unittest.TestCase):
             lv = allowed_levels(level)
             for q in ("four gospels", "Enda Abba Garima", "እንዳ", "gospels", "LIT0001", "nothing"):
                 with self.subTest(q=q, role=level):
-                    m = [i for i in self.ids(self.mem.find_nodes(q, lv)) if i.startswith("itest_")]
-                    n = [i for i in self.ids(self.neo.find_nodes(q, lv)) if i.startswith("itest_")]
-                    self.assertEqual(sorted(m), sorted(n))
-                    if m:
-                        self.assertEqual(m[0], n[0])  # best match first in both
+                    m = [i for i in self.ids(self.mem.find_nodes(q, lv, limit=10**6)) if i.startswith("itest_")]
+                    n = [i for i in self.ids(self.neo.find_nodes(q, lv, limit=10**6)) if i.startswith("itest_")]
+                    self.assertEqual(m, n)  # same ids in the same order
 
     def test_neighbours_and_incoming_same_and_access_filtered(self):
         for level in ("public", "custodian"):
             lv = allowed_levels(level)
             with self.subTest(role=level):
-                key = lambda rows: sorted((e["source_locator"], t["id"]) for e, t in rows)
+                key = lambda rows: [(e["source_locator"], t["id"]) for e, t in rows]  # order matters: the agent caps per node
                 self.assertEqual(key(self.mem.neighbours("itest_m1", lv)), key(self.neo.neighbours("itest_m1", lv)))
                 self.assertEqual(key(self.mem.incoming("itest_w", lv)), key(self.neo.incoming("itest_w", lv)))
         self.assertNotIn("itest_m3", [s["id"] for _, s in self.neo.incoming("itest_w", allowed_levels("public"))])
