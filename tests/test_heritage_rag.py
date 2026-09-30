@@ -419,5 +419,48 @@ class RankingTests(unittest.TestCase):
         self.assertEqual(g.find_nodes("gospels", {"public"}, limit=2)[0]["id"], "w")
 
 
+class CypherExportTests(unittest.TestCase):
+    def test_string_escaping(self):
+        from heritage_rag.export_cypher import cy_str
+        self.assertEqual(cy_str("a'b"), "'a\\'b'")
+        self.assertEqual(cy_str("back\\slash"), "'back\\\\slash'")
+        self.assertEqual(cy_str("two\nlines\ttab"), "'two\\nlines\\ttab'")
+        self.assertEqual(cy_str("\u12a0\u1263"), "'\u12a0\u1263'")  # Geez stays as-is
+
+    def test_script_has_constraint_labels_and_citations(self):
+        from heritage_rag import export_cypher as ex
+        nodes, edges, _ = build()[:3]
+        for n in nodes.values():
+            n["confidence"] = float(n["confidence"])
+        for e in edges:
+            e["confidence"] = float(e["confidence"])
+        text = "\n".join(ex.statements(nodes, edges, batch=2))
+        self.assertIn("CREATE CONSTRAINT node_id", text)
+        self.assertIn("SET n:`E84_Information_Carrier`", text)
+        self.assertIn("MERGE (a)-[x:HELD_AT", text)
+        self.assertIn("x.source_locator = r[", text)
+        self.assertIn("toFloat(r[", text)
+        self.assertIn(", 1.0,", text)
+
+    def test_batching_splits_large_groups(self):
+        from heritage_rag import export_cypher as ex
+        nodes = {f"n{i}": {"id": f"n{i}", "label": f"L{i}", "cidoc_class": "E53_Place", "category": "c", "aliases": "",
+                           "access_level": "public", "confidence": 1.0} for i in range(5)}
+        stmts = [s for s in ex.statements(nodes, [], batch=2) if s.startswith("UNWIND")]
+        self.assertEqual(len(stmts), 3)
+
+    def test_rows_are_positional_lists_not_maps(self):
+        from heritage_rag import export_cypher as ex
+        row = ex.cy_row({"id": "a", "label": "it's"}, ["id", "label", "missing"])
+        self.assertEqual(row, "['a', 'it\\'s', '']")
+
+    def test_unknown_class_or_relationship_rejected(self):
+        from heritage_rag import export_cypher as ex
+        with self.assertRaises(ValueError):
+            list(ex.statements({"a": {"id": "a", "label": "x", "cidoc_class": "Evil`) DETACH DELETE (n", "aliases": ""}}, []))
+        with self.assertRaises(ValueError):
+            list(ex.statements({}, [{"relationship": "X]->() DELETE", "source": "a", "target": "b"}]))
+
+
 if __name__ == "__main__":
     unittest.main()
