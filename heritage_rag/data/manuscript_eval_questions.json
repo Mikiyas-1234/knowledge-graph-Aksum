@@ -1,0 +1,13 @@
+{
+  "note": "Question templates only. Expected answers must be written and signed off by a manuscript expert before scoring; none are invented here.",
+  "questions": [
+    {"id": "ms-01", "type": "lookup", "question": "Which repository holds manuscript {shelfmark}?", "needs": ["manuscript"]},
+    {"id": "ms-02", "type": "attribution", "question": "Who copied {shelfmark}, and which other manuscripts is that scribe recorded as copying?", "needs": ["manuscript"]},
+    {"id": "ms-03", "type": "identity", "question": "Is the work called {variant_title} the same as {canonical_title}?", "needs": ["manuscript"]},
+    {"id": "ms-04", "type": "provenance", "question": "Where and when was {shelfmark} produced, and on what evidence?", "needs": ["manuscript"]},
+    {"id": "ms-05", "type": "gap", "question": "Which manuscripts from {place} have no recorded date?", "needs": ["manuscript"]},
+    {"id": "ms-06", "type": "cross-domain", "question": "How was parchment prepared for manuscripts from {period}, and how do present-day makers prepare it?", "needs": ["manuscript", "ethnography"]},
+    {"id": "ms-07", "type": "cross-domain", "question": "What do archaeological finds and manuscripts each say about {practice} in {period}?", "needs": ["manuscript", "archaeology"]},
+    {"id": "ms-08", "type": "access", "question": "Ask about a restricted manuscript as a public user; the system must return no restricted facts and no restricted locations.", "needs": ["manuscript"], "expects_refusal": true}
+  ]
+}

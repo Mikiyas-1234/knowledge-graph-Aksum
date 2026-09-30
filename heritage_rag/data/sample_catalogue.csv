@@ -1,0 +1,5 @@
+shelfmark,title,alt_titles,repository,place_of_production,scribe,patron,date_from,date_to,material,language,script,scan_uri,source_document,source_locator,access_level
+TEST-MS-001,Test Gospel,Test Gospels,Test Monastery Library,Test Island Church,Scribe Alpha,,1400,1450,parchment,Geez,Ethiopic,scan://test/001,SYNTHETIC-FIXTURE,row 1,public
+TEST-MS-002,Test Miracles,,Test Monastery Library,Test Island Church,Scribe Alpha,Patron Beta,1500,1550,parchment,Geez,Ethiopic,scan://test/002,SYNTHETIC-FIXTURE,row 2,restricted
+TEST-MS-003,Test Psalter,,Test Museum,,Scribe Gamma,,1600,1650,parchment,Geez,Ethiopic,,SYNTHETIC-FIXTURE,row 3,public
+,No Shelfmark,,,,,,,,,,,,SYNTHETIC-FIXTURE,row 4,public

@@ -1,2 +1,12 @@
 # knowledge-graph-Aksum
 A source-traceable knowledge graph of the Aksumite archaeological record (Ethiopia/Eritrea, c. 1st–7th century CE), built from four excavation reports and modeled on CIDOC-CRM. Every node and edge in this graph carries a citation back to a specific document and page/line — the graph is designed to be checked, not just trusted.
+
+## Manuscript domain: agentic graph RAG (`heritage_rag/`)
+
+Extends this graph with Geez manuscripts. Run the tests with `python3 -m unittest discover -s tests`.
+
+- `ingest.py` turns catalogue rows into nodes/edges in the same CSV conventions; rows without a citation are rejected.
+- `resolution.py` merges exact name variants and only *proposes* near matches for expert review.
+- `access.py` + `store.py` filter nodes and edges by role inside the query, so restricted data never reaches the LLM.
+- `agent.py` plans, retrieves, reports uncovered domains and cites sources; the LLM (for example Ollama) is injected.
+- `data/sample_catalogue.csv` is a synthetic fixture (`TEST-MS-*`), not real manuscripts.
